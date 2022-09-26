@@ -15,12 +15,16 @@ import streamlit as st
 import requests
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
+import numpy as np
+import json
 
 
 # In[3]:
 
 
 api = KaggleApi()
+with open('kaggle.json') as json_file:
+    config_data = json.load(json_file)
 api.authenticate()
 
 
