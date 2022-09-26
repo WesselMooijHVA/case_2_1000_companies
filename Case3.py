@@ -27,7 +27,7 @@ api = KaggleApi()
 #with open('kaggle.json') as json_file:
 #    config_data = json.load(json_file)
 config_data= {"username":"davevanderschouw","key":"dea650c8a5aa2e60e1af506563daf342"}
-api.authenticate()
+api.authenticate(config_data)
 
 
 # In[4]:
