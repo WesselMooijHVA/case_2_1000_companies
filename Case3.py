@@ -9,16 +9,9 @@ import pandas as pd
 import numpy as np
 import json
 import os
+import authentication
 
-#initiating API and setting username and key as environment variables
-api = KaggleApi()
-with open('kaggle.json') as json_file:
-    config_data = json.load(json_file)
-os.environ['KAGGLE_USERNAME'] = config_data['username']
-os.environ['KAGGLE_KEY'] = config_data['key']
-
-#authenticate using environment variables
-api.authenticate()
+authentication.auth()
 
 #importing datasets from API
 api.dataset_download_files('surajjha101/fortune-top-1000-companies-by-revenue-2022', unzip=True)
