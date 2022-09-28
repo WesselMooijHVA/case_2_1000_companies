@@ -7,7 +7,7 @@
 #!pip install kaggle
 
 
-# In[2]:
+# In[40]:
 
 
 import requests
@@ -16,12 +16,14 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import plotly.express as px
+import streamlit as st
 
 
 # In[17]:
 
 
-from ..pages import authentication
+import authentication
 
 
 api = KaggleApi()
@@ -145,6 +147,22 @@ df_2022_top100
 
 
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
+
+
+# In[38]:
+
+
+fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600,)
+fig.update_layout(xaxis={'categoryorder':'total descending'})
+fig.update_xaxes(title_text='Bedrijfsnaam')
+fig.update_yaxes(title_text='Verandering in Marktwaarde')
+fig.show()
+
+
+# In[42]:
+
+
+st.plotly_chart(fig)
 
 
 # In[ ]:
