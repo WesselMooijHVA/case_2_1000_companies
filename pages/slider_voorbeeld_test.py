@@ -52,7 +52,7 @@ df_2022[['Rank 2022']] = df_2022[['Rank 2022']].apply(pd.to_numeric)
 bedrijven = df_2022[df_2022['Rank 2022'] <= selectie]
 
 #display plot in streamlit
-fig = px.scatter(bedrijven, x = "Profit 2021", y = "Profits 2022", color = "Name")
+fig = px.scatter(bedrijven, x = "Employees", y = "Profits 2022", color = "Name")
 st.plotly_chart(fig)
 
 
