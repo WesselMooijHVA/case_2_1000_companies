@@ -3,6 +3,7 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 import numpy as np
 import streamlit as st
+import plotly.express as px
 
 
 import authentication
