@@ -194,6 +194,7 @@ import plotly.express as px
 selectie = st.slider(
     'selectie text',0,1000,100)
 
+df_2022[['Rank 2022']] = df_2022[['Rank 2022']].set_value(999, 'Rank 2022', '1000')
 df_2022[['Rank 2022']] = df_2022[['Rank 2022']].apply(pd.to_numeric)
 bedrijven = df_2022[df_2022['Rank 2022'] <= selectie]
 fig = px.scatter(bedrijven, x = "Profit 2021", y = "Profits 2022", color = "Name")
