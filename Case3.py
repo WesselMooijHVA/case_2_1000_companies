@@ -43,6 +43,15 @@ def auth_json(api):
   api.authenticate()  
 '''
 st.code(code, language='python')
+st.write('Deze functie word dan gebruikt voor de authentication'
+code = '''
+import authentication
+from kaggle.api.kaggle_api_extended import KaggleApi
+
+api = KaggleApi()
+authentication.auth_json(api)
+'''
+st.code(code, language='python')
 
 st.header('Dataframes die we gebruiken')
 st.subheader('data 2021 fortune 1000 companies')
