@@ -197,7 +197,7 @@ geselecteerd_bedrijf = st.select_slider(
 
 bedrijf = top_5_bedrijven[top_5_bedrijven['Name'] == geselecteerd_bedrijf]
 fig = px.scatter(bedrijf, x = "Profit 2021", y = "Profits 2022", color = "Name")
-
+st.plotly_chart(fig)
 
 #dropdown_buttons = [{"label":"Walmart", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"Walmart"}]}, {"label":"Amazon", "method":"update","args":[{"visible":[False, True, False, False, False]},{"title":"Amazon"}]},{"label":"Apple", "method":"update","args":[{"visible":[False,False,True, False, False]},{"title":"Apple"}]},{"label":"CVS Health", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"CVS Health"}]},{"label":"UnitedHealth Group", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"UnitedHealth Group"}]}]
 #ig.update_layout({"updatemenus":[{"type":"dropdown","x": 1.3,"y":0.5,"showactive":True,"active":0,"buttons": dropdown_buttons}]})
