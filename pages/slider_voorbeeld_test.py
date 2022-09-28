@@ -55,6 +55,7 @@ bedrijven = df_2022[df_2022['Rank 2022'] <= selectie]
 fig = px.scatter(bedrijven, x = "Employees", y = "Profits 2022", color = "Name")
 st.plotly_chart(fig)
 
+#WERKT NIET OMDAT ALLE DATATYPES STRING ZIJN IPV INT OF FLOAT
 
 # In[ ]:
 
