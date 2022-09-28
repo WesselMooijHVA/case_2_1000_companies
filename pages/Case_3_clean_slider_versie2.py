@@ -191,7 +191,7 @@ import plotly as plt
 import plotly.graph_objects as go
 import plotly.express as px
 
-selectie = st.select_slider(
+selectie = st.slider(
     'selectie text',0,1000,100)
 
 bedrijven = top_5_bedrijven[top_5_bedrijven['Rank 2022'] <= selectie]
