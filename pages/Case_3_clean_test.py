@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 # In[17]:
 
 
-from main import authentication
+from __main__ import authentication
 
 
 api = KaggleApi()
