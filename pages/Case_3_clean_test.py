@@ -150,5 +150,5 @@ df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 # In[ ]:
 
 
-fig= 
+
 
