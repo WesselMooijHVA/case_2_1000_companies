@@ -28,6 +28,7 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 st.title('Fortune 1000 companies')
 st.header('kaggle API')
 code = '''
+#authentication.py
 def auth_json(api):
   #imports
   import json
