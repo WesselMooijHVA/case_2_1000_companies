@@ -27,11 +27,7 @@ df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Pro
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
-
-df_2022.isna().sum()
-
 df_2022 = df_2022.dropna()
-df_2022['Country'].value_counts()
 
 st.dataframe(df_2022)
 
