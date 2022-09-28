@@ -191,12 +191,11 @@ import plotly as plt
 import plotly.graph_objects as go
 import plotly.express as px
 
-geselecteerd_bedrijf = st.select_slider(
-    'Select bedrijfnamen top 5',
-    options=["Walmart", "Amazon", "Apple", "CVS Health", "UnitedHealth Group"])
+selectie = st.select_slider(
+    'selectie text',0,1000,100)
 
-bedrijf = top_5_bedrijven[top_5_bedrijven['Name'] == geselecteerd_bedrijf]
-fig = px.scatter(bedrijf, x = "Profit 2021", y = "Profits 2022", color = "Name")
+bedrijven = top_5_bedrijven[top_5_bedrijven['Rank 2022'] <= selectie]
+fig = px.scatter(bedrijven, x = "Profit 2021", y = "Profits 2022", color = "Name")
 st.plotly_chart(fig)
 
 #dropdown_buttons = [{"label":"Walmart", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"Walmart"}]}, {"label":"Amazon", "method":"update","args":[{"visible":[False, True, False, False, False]},{"title":"Amazon"}]},{"label":"Apple", "method":"update","args":[{"visible":[False,False,True, False, False]},{"title":"Apple"}]},{"label":"CVS Health", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"CVS Health"}]},{"label":"UnitedHealth Group", "method":"update","args":[{"visible":[True, False, False, False, False]},{"title":"UnitedHealth Group"}]}]
