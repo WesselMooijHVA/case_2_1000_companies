@@ -43,7 +43,7 @@ def auth_json(api):
   api.authenticate()  
 '''
 st.code(code, language='python')
-st.write('Deze functie word dan gebruikt voor de authentication'
+st.write('Deze functie word dan gebruikt voor de authentication')
 code = '''
 import authentication
 from kaggle.api.kaggle_api_extended import KaggleApi
