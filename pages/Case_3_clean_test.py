@@ -18,11 +18,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-# In[3]:
+# In[17]:
+
+
+import authentication
 
 
 api = KaggleApi()
-api.authenticate()
+
+authentication.auth_json(api)
 
 
 # In[4]:
@@ -121,7 +125,7 @@ ax, fig= plt.subplots(figsize=(20, 20))
 sns.heatmap(corr, cmap="Greens", annot=True, vmin= -1, vmax= 1)
 
 
-# In[14]:
+# In[19]:
 
 
 df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
@@ -130,15 +134,21 @@ df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employe
 df_2022.fillna(0, axis= 1)
 
 
-# In[15]:
+# In[20]:
 
 
 df_2022_top100= df_2022[0:86]
 df_2022_top100
 
 
+# In[18]:
+
+
+df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
+
+
 # In[ ]:
 
 
-
+fig= 
 
