@@ -194,7 +194,7 @@ import plotly.express as px
 selectie = st.slider(
     'selectie text',0,1000,100)
 
-bedrijven = top_5_bedrijven[top_5_bedrijven['Rank 2022'] <= selectie]
+bedrijven = top_5_bedrijven[int(top_5_bedrijven['Rank 2022']) <= selectie]
 fig = px.scatter(bedrijven, x = "Profit 2021", y = "Profits 2022", color = "Name")
 st.plotly_chart(fig)
 
