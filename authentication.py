@@ -1,4 +1,4 @@
-def auth(api):
+def auth1(api):
   #imports
   import json
   import os
