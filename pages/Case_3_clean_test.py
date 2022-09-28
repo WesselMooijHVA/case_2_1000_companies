@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 # In[17]:
 
 
-from case_2_1000_companies import authentication
+from ..pages import authentication
 
 
 api = KaggleApi()
