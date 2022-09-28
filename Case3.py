@@ -24,10 +24,29 @@ df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
 
-st.title('Dataframes die we gebruiken')
-st.header('data 2021 fortune 1000 companies')
+st.title('Fortune 1000 companies')
+st.header('kaggle API')
+code = '''
+def auth_json(api):
+  #imports
+  import json
+  import os
+
+  #initiating API and setting username and key as environment variables
+  with open('kaggle.json') as json_file:
+    config_data = json.load(json_file)
+  os.environ['KAGGLE_USERNAME'] = config_data['username']
+  os.environ['KAGGLE_KEY'] = config_data['key']
+
+  #authenticate using environment variables
+  api.authenticate()  
+'''
+st.code(code, language='python')
+
+st.header('Dataframes die we gebruiken')
+st.subheader('data 2021 fortune 1000 companies')
 st.dataframe(df_2021)
-st.header('data 2022 fortune 1000 companies')
+st.subheader('data 2022 fortune 1000 companies')
 st.dataframe(df_2022)
 
 
