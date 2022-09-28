@@ -8,9 +8,10 @@ import pandas as pd
 import numpy as np
 import json
 import os
-import authentication
 
+import authentication
 from kaggle.api.kaggle_api_extended import KaggleApi
+
 api = KaggleApi()
 authentication.auth_json(api)
 
