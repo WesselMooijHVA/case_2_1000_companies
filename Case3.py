@@ -24,10 +24,10 @@ df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
 
-#joining the tables into one dataframe
-df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
-df_2022 = df_2022.dropna()
-
-#printing the dataframe into streamlit
+st.title('Dataframes die we gebruiken')
+st.header('data 2021 fortune 1000 companies')
+st.dataframe(df_2021)
+st.header('data 2022 fortune 1000 companies')
 st.dataframe(df_2022)
+
 
