@@ -192,7 +192,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 selectie = st.slider(
-    'selectie text',0,df_2022.size,10)
+    'selectie text',0,df_2022.size.item(),10)
 
 df_2022.drop(df_2022.tail(1).index,inplace=True)
 df_2022[['Rank 2022']] = df_2022[['Rank 2022']].apply(pd.to_numeric)
