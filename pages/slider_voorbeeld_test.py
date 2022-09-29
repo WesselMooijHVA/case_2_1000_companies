@@ -70,9 +70,6 @@ for i in range(3,16):
 selectie = st.slider(
     'selectie text',0,int(df_2022.shape[0]),10)
 
-#tijdelijke oplossing want 1,000 wilt niet converten naar int door kut komma (delete de laatste kolom met 1,000)
-df_2022.drop(df_2022.tail(1).index,inplace=True)
-
 #rank van string naar een nummer veranderen
 df_2022[['Rank 2022']] = df_2022[['Rank 2022']].apply(pd.to_numeric)
 
