@@ -126,13 +126,21 @@ rev = CleanColumns(df_2022, col_convert)
 # In[ ]:
 
 
-
+st.subheader('2021 data bruikbaar maken voor berekeningen')
+st.code('''''''''def convert(x):
+    if 'M' in str(x):
+        x = float(str(x).replace(',','').strip('$M '))/1000
+    elif 'B' in str(x):
+        x = float(str(x).replace(',','').strip('$B '))
+    return x)
+for i in range(3,16):
+    df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)''''' , language= 'python')
 
 
 # In[12]:
 
 
-st.subheader('2021 data bruikbaar maken voor berekeningen')
+
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
@@ -148,10 +156,21 @@ for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
 
-# In[16]:
+# In[23]:
 
 
 st.subheader('de berekeningen')
+st.code('''''''''df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
+df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
+df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
+df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
+df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
+df_2022.fillna(0, axis= 1)''''', language= 'python')
+
+
+# In[24]:
+
+
 df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
 df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
 df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
@@ -203,6 +222,7 @@ df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 # In[20]:
 
 
+st.subheader('market value change')
 fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600)
 fig.update_layout(xaxis={'categoryorder':'total descending'})
 fig.update_xaxes(title_text='Bedrijfsnaam')
