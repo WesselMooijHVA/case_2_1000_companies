@@ -60,7 +60,7 @@ st.code(code, language='python')
 
 
 st.header('Dataframes die we gebruiken')
-st.subheader('data 2021 fortune 1000 companies')
+st.subheader('data 2021 fortune 2000 companies')
 st.image('Kaggle1.png')
 st.dataframe(df_2021)
 
