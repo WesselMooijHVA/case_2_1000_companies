@@ -115,7 +115,49 @@ fig.update_layout(height=600, width=1000, title_text="Side By Side 2021 & 2022")
 
 st.plotly_chart(fig)
 
+st.subheader('de code')
+code= '''
+#build slider
+selectie = st.slider(
+    'Selecteer het aantal bedrijven (Top)',0,int(df_2022.shape[0]),10)
 
+#dataframe filteren op selectie
+bedrijven = df_2022[df_2022['Rank 2022'] <= selectie]
 
+#figuur aanmaken
+fig = make_subplots(rows=1, cols=2,
+                   subplot_titles=("2021","2022",))
+                   
+#twee traces aan figuur toevoegen
+fig.add_trace(
+    go.Scatter(x=bedrijven['Assets 2021'], y=bedrijven['Profit 2021'],
+        mode="markers+text",
+        text=bedrijven["Name"],
+        textposition="bottom center",
+        name='2021'
+        ),
+    row=1, col=1
+)
+
+fig.add_trace(
+    go.Scatter( x=bedrijven['Assets 2022'], y=bedrijven['Profits 2022'],
+        mode="markers+text",
+        text=bedrijven["Name"],
+        textposition="bottom center",
+        name='2022'
+        ),
+    row=1, col=2
+)
+fig.update_xaxes(title_text="Assets", row=1, col=1)
+fig.update_xaxes(title_text="Assets", row=1, col=2)
+
+fig.update_yaxes(title_text="Profit", row=1, col=1)
+fig.update_yaxes(title_text="Profit",  row=1, col=2)
+
+fig.update_layout(height=600, width=1000, title_text="Side By Side 2021 & 2022")
+
+st.plotly_chart(fig)
+'''
+st.code(code)
 
 
