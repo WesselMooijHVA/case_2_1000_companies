@@ -99,7 +99,7 @@ rev = CleanColumns(df_2022, col_convert)
 # In[176]:
 
 
-rev
+st.dataframe(rev)
 
 
 # In[177]:
@@ -119,7 +119,7 @@ for i in range(3,16):
 # In[178]:
 
 
-df_2022
+st.dataframe(df_2022)
 
 
 # In[179]:
@@ -159,7 +159,7 @@ fig.update_yaxes(title_text="Winst 2022 in miljard")
 # In[180]:
 
 
-df_2022
+st.dataframe(df_2022)
 
 
 # In[ ]:
