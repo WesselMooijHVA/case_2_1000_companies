@@ -141,7 +141,7 @@ st.sidebar.selectbox('selecteer de variabelen',('Rank 2022', 'Name', 'Revenues 2
        'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
        'profit_per_employee_2022', 'revenue_per_employee_2022',
        'profit_per_sale_2021'))
-selectboxselection= df_2022 == kolommen
+selectboxselection= df_2022[df_2022] == kolommen
 st.dataframe(selectboxselection)
 
 
