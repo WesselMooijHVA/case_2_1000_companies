@@ -33,7 +33,7 @@ authentication.auth_json(api)
 # In[191]:
 
 
-st.title('dataframe verwerking en visualisatie in vorm van dropdown menu')
+st.title('Dataframe verwerking en visualisatie in vorm van dropdown menu')
 
 
 # In[192]:
@@ -185,8 +185,6 @@ fig.show()
 
 # In[202]:
 
-
-df_2022
 
 
 # In[ ]:
