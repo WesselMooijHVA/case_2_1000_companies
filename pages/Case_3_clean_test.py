@@ -7,7 +7,7 @@
 #!pip install kaggle
 
 
-# In[40]:
+# In[2]:
 
 
 import requests
@@ -20,7 +20,7 @@ import plotly.express as px
 import streamlit as st
 
 
-# In[17]:
+# In[3]:
 
 
 import authentication
@@ -31,39 +31,45 @@ api = KaggleApi()
 authentication.auth_json(api)
 
 
-# In[4]:
+# In[20]:
+
+
+st.title('dataframe hervorming en Market Value')
+
+
+# In[5]:
 
 
 api.dataset_download_files('surajjha101/fortune-top-1000-companies-by-revenue-2022', unzip=True)
 df_2022 = pd.read_csv('Fortune 1000 Companies by Revenue.csv')
 
 
-# In[5]:
+# In[6]:
 
 
 api.dataset_download_files('shivamb/fortune-global-2000-companies-till-2021', unzip=True)
 df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 
 
-# In[6]:
+# In[7]:
 
 
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
 
 
-# In[7]:
+# In[8]:
 
 
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
 
 
-# In[8]:
+# In[9]:
 
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-# In[9]:
+# In[10]:
 
 
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
@@ -95,7 +101,7 @@ rev = CleanColumns(df_2022, col_convert)
 
 
 
-# In[10]:
+# In[11]:
 
 
 def convert(x):
@@ -106,28 +112,40 @@ def convert(x):
     return x
 
 
-# In[11]:
+# In[12]:
 
 
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
 
-# In[12]:
+# In[13]:
 
 
 df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
 
 
-# In[13]:
+# In[26]:
 
 
 corr = df_2022.corr()
-ax, fig= plt.subplots(figsize=(20, 20))
-sns.heatmap(corr, cmap="Greens", annot=True, vmin= -1, vmax= 1)
+fig2= px.imshow(corr, text_auto= True, color_continuous_scale='RdBu_r', width= 1200 , height= 1000 )
+fig2.update_layout(title='heatmap van de verschillende correlaties tussen de kolommen')
+fig2.show()
+st.plotly_chart(fig2)
+kolommen= df_2022_top100.columns
+st.sidebar.selectbox('selecteer de variabelen',('Rank 2022', 'Name', 'Revenues 2022', 'revenue_percent_change',
+       'Profits 2022', 'profits_percent_change', 'Assets 2022',
+       'Market Value 2022', 'change_in_rank', 'Employees', 'Rank 2021',
+       'Country', 'Sales 2021', 'Profit 2021', 'Assets 2021',
+       'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
+       'profit_per_employee_2022', 'revenue_per_employee_2022',
+       'profit_per_sale_2021'))
+selectboxselection= df_2022 == kolommen
+st.dataframe(selectboxselection)
 
 
-# In[19]:
+# In[15]:
 
 
 df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
@@ -136,30 +154,30 @@ df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employe
 df_2022.fillna(0, axis= 1)
 
 
-# In[20]:
+# In[25]:
 
 
 df_2022_top100= df_2022[0:86]
 df_2022_top100
 
 
-# In[18]:
+# In[17]:
 
 
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 
 
-# In[38]:
+# In[18]:
 
 
-fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600,)
+fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600)
 fig.update_layout(xaxis={'categoryorder':'total descending'})
 fig.update_xaxes(title_text='Bedrijfsnaam')
 fig.update_yaxes(title_text='Verandering in Marktwaarde')
 fig.show()
 
 
-# In[42]:
+# In[19]:
 
 
 st.plotly_chart(fig)
