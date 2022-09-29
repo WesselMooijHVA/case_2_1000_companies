@@ -72,7 +72,7 @@ df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
 st.subheader('2022 data bruikbaar maken voor berekeningen')
-st.code(col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
+col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
 
 
