@@ -61,7 +61,7 @@ def convert(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
     elif 'B' in str(x):
         x = float(str(x).replace(',','').strip('$B '))
-    return x)
+    return x
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
