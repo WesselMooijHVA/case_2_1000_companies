@@ -31,10 +31,10 @@ api = KaggleApi()
 authentication.auth_json(api)
 
 
-# In[4]:
+# In[22]:
 
 
-st.title('dataframe hervorming en Market Value')
+st.title('dataframe verwerking en eerste analyses')
 
 
 # In[5]:
@@ -69,8 +69,37 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-# In[10]:
+# In[24]:
 
+
+
+
+
+# In[26]:
+
+
+st.subheader('2022 data bruikbaar maken voor berekeningen')
+st.code('col_convert = [' 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees' ]
+'remove_symbols = ['$', '%',',','(',')','-']
+
+'def CleanColumns(df, cols):
+
+    'for col in cols: 
+        'if pd.api.types.is_object_dtype(df[col]):
+            'if type(df[col]) != type(float):
+                'for sym in remove_symbols: 
+                    'df[col] = df[col].str.replace(sym, "", regex = True)
+                'df[col] = df[col].str.strip()
+                'df[col] = df[col].astype('string')'
+                'df[col] = df[col].fillna(0)
+                'try:
+                    'df[col] =pd.to_numeric(df[col], errors=''coerce')
+                    'print("Converted " + col )
+                'except: 
+                    'print("Seems to be an issue with column " + col)
+    'return df 
+
+'rev = CleanColumns(df_2022, col_convert)', language= 'python')
 
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
@@ -104,6 +133,7 @@ rev = CleanColumns(df_2022, col_convert)
 # In[11]:
 
 
+st.subheader('2021 data bruikbaar maken voor berekeningen')
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
@@ -122,7 +152,15 @@ for i in range(3,16):
 # In[13]:
 
 
+st.subheader('de berekeningen')
 df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
+df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
+df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
+df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
+df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
+df_2022.fillna(0, axis= 1
+df_2022_top100= df_2022[0:86]
+df_2022_top100
 
 
 # In[14]:
@@ -138,32 +176,19 @@ st.plotly_chart(fig2)
 # In[15]:
 
 
-df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
-df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
-df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
-df_2022.fillna(0, axis= 1)
+
 
 
 # In[16]:
 
 
-kolommen= df_2022.columns
-st.sidebar.selectbox('selecteer de variabelen',('Rank 2022', 'Name', 'Revenues 2022', 'revenue_percent_change',
-       'Profits 2022', 'profits_percent_change', 'Assets 2022',
-       'Market Value 2022', 'change_in_rank', 'Employees', 'Rank 2021',
-       'Country', 'Sales 2021', 'Profit 2021', 'Assets 2021',
-       'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
-       'profit_per_employee_2022', 'revenue_per_employee_2022',
-       'profit_per_sale_2021'))
-selectboxselection= df_2022 == kolommen
-st.dataframe(selectboxselection)
 
 
-# In[21]:
+
+# In[ ]:
 
 
-df_2022_top100= df_2022[0:86]
-df_2022_top100
+
 
 
 # In[18]:
