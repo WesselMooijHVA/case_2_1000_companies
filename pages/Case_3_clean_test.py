@@ -31,7 +31,7 @@ api = KaggleApi()
 authentication.auth_json(api)
 
 
-# In[22]:
+# In[15]:
 
 
 st.title('dataframe verwerking en eerste analyses')
@@ -69,7 +69,7 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-# In[29]:
+# In[10]:
 
 
 st.subheader('2022 data bruikbaar maken voor berekeningen')
@@ -96,7 +96,7 @@ def CleanColumns(df, cols):
 rev = CleanColumns(df_2022, col_convert)''', language= 'python')
 
 
-# In[28]:
+# In[11]:
 
 
 
@@ -129,7 +129,7 @@ rev = CleanColumns(df_2022, col_convert)
 
 
 
-# In[11]:
+# In[12]:
 
 
 st.subheader('2021 data bruikbaar maken voor berekeningen')
@@ -141,14 +141,14 @@ def convert(x):
     return x
 
 
-# In[12]:
+# In[13]:
 
 
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
 
-# In[13]:
+# In[16]:
 
 
 st.subheader('de berekeningen')
@@ -157,12 +157,16 @@ df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'
 df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
 df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
-df_2022.fillna(0, axis= 1
+df_2022.fillna(0, axis= 1)
+
+
+# In[18]:
+
+
 df_2022_top100= df_2022[0:86]
-df_2022_top100
 
 
-# In[14]:
+# In[19]:
 
 
 corr = df_2022.corr()
@@ -172,13 +176,7 @@ fig2.show()
 st.plotly_chart(fig2)
 
 
-# In[15]:
-
-
-
-
-
-# In[16]:
+# In[ ]:
 
 
 
@@ -190,13 +188,19 @@ st.plotly_chart(fig2)
 
 
 
-# In[18]:
+# In[ ]:
+
+
+
+
+
+# In[21]:
 
 
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 
 
-# In[19]:
+# In[20]:
 
 
 fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600)
@@ -206,7 +210,7 @@ fig.update_yaxes(title_text='Verandering in Marktwaarde')
 fig.show()
 
 
-# In[20]:
+# In[22]:
 
 
 st.plotly_chart(fig)
