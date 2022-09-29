@@ -71,7 +71,7 @@ df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 # In[197]:
 
 
-st.subheader('2022 data bruikbaar maken voor berekeningen')
+st.subheader('2022 en 2021 data bruikbaar maken voor berekeningen')
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
 
@@ -105,7 +105,7 @@ rev
 # In[199]:
 
 
-st.subheader('2021 data bruikbaar maken voor berekeningen')
+
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
@@ -119,7 +119,7 @@ for i in range(3,16):
 # In[200]:
 
 
-df_2022
+
 
 
 # In[201]:
