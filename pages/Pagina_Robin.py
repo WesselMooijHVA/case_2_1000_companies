@@ -80,9 +80,9 @@ fig.add_trace(
     go.Scatter(x=bedrijven['Assets 2021'], y=bedrijven['Profit 2021'],
         mode="markers+text",
         text=bedrijven["Name"],
-        textposition="bottom center"
-              
-              ),
+        textposition="bottom center",
+        name='2021'
+        ),
     row=1, col=1
 )
 
@@ -90,8 +90,9 @@ fig.add_trace(
     go.Scatter( x=bedrijven['Assets 2022'], y=bedrijven['Profits 2022'],
         mode="markers+text",
         text=bedrijven["Name"],
-        textposition="bottom center"
-              ),
+        textposition="bottom center",
+        name='2022'
+        ),
     row=1, col=2
 )
 fig.update_xaxes(title_text="Assets", row=1, col=1)
