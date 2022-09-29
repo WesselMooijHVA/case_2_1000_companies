@@ -179,10 +179,27 @@ df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 df_2022.fillna(0, axis= 1)
 
 
-# In[18]:
+# In[32]:
 
 
 df_2022_top100= df_2022[0:86]
+st.subheader('eindresultaat')
+st.dataframe(df_2022_top100)
+
+
+# In[37]:
+
+
+kolommen= df_2022_top100.columns
+input_top100= st.sidebar.selectbox('selecteer variabelen', ('Rank 2022', 'Name', 'Revenues 2022', 'revenue_percent_change',
+       'Profits 2022', 'profits_percent_change', 'Assets 2022',
+       'Market Value 2022', 'change_in_rank', 'Employees', 'Rank 2021',
+       'Country', 'Sales 2021', 'Profit 2021', 'Assets 2021',
+       'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
+       'profit_per_employee_2022', 'revenue_per_employee_2022',
+       'profit_per_sale_2021'))
+selectie_top100= df_2022_top100 == input_top100
+st.dataframe(selectie_top100)
 
 
 # In[19]:
