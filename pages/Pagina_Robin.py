@@ -59,7 +59,8 @@ for i in range(3,16):
 
 
 
-
+#Title en df
+st.title('Fortune 1000 Assets & Profits')
 
 #build slider
 selectie = st.slider(
