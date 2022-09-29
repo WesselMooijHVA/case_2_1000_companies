@@ -171,7 +171,7 @@ df_2022.fillna(0, axis= 1)''''', language= 'python')
 # In[24]:
 
 
-df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
+df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']*1000
 df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
 df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
 df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
