@@ -178,7 +178,7 @@ df_2022_top100= df_2022[0:86]
 
 
 selectie = st.slider(
-    'slider',0,int(df_2022.shape[0]),10)
+    'slider',0,100,10)
 
 #tijdelijke oplossing want 1,000 wilt niet converten naar int door kut komma (delete de laatste kolom met 1,000)
 df_2022.drop(df_2022.tail(1).index,inplace=True)
