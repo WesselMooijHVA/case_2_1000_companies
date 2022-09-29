@@ -141,7 +141,7 @@ df_2022.head()
 
 # In[13]:
 
-
+'''
 fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
 fig.update_yaxes(categoryorder='category ascending')
 st.plotly_chart(fig)
@@ -163,7 +163,7 @@ fig.show()
 #fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
 #fig.update_yaxes(categoryorder='category ascending')
 #fig.show()
-
+'''
 
 # In[16]:
 
