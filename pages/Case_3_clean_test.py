@@ -187,6 +187,12 @@ df_2022_top100= df_2022[0:86]
 st.subheader('eindresultaat')
 
 
+# In[34]:
+
+
+st.dataframe(df_2022)
+
+
 # In[18]:
 
 
@@ -197,10 +203,10 @@ fig2.show()
 st.plotly_chart(fig2)
 
 
-# In[19]:
+# In[ ]:
 
 
-df_2022
+
 
 
 # In[ ]:
@@ -256,13 +262,14 @@ st.plotly_chart(fig)
 
 
 
-# In[23]:
+# In[32]:
 
 
+df_2022_top100_Market_Value_change= df_2022_top100[['Name', 'Market_Value_change']]
 box= st.checkbox('grote marktwaarde')
 st.write('checkbox is', box)
 if box:
-    df_2022_top100[0: 10]
+    df_2022_top100_Market_Value_change[0: 10]
 
 
 # In[ ]:
