@@ -5,9 +5,10 @@
 
 
 #!pip install kaggle
+#!pip install streamlit
 
 
-# In[15]:
+# In[14]:
 
 
 import requests
@@ -15,51 +16,56 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 import numpy as np
 import plotly.express as px
-
-
-# In[3]:
-
+import streamlit as st
+import authentication
 
 api = KaggleApi()
-api.authenticate()
+
+authentication.auth_json(api)
 
 
-# In[4]:
+# In[ ]:
+
+
+
+
+
+# In[15]:
 
 
 api.dataset_download_files('surajjha101/fortune-top-1000-companies-by-revenue-2022', unzip=True)
 df_2022 = pd.read_csv('Fortune 1000 Companies by Revenue.csv')
 
 
-# In[5]:
+# In[16]:
 
 
 api.dataset_download_files('shivamb/fortune-global-2000-companies-till-2021', unzip=True)
 df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 
 
-# In[6]:
+# In[17]:
 
 
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
 df_2021
 
 
-# In[7]:
+# In[18]:
 
 
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
 df_2022
 
 
-# In[8]:
+# In[19]:
 
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 df_2022
 
 
-# In[9]:
+# In[20]:
 
 
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
@@ -85,13 +91,13 @@ def CleanColumns(df, cols):
 rev = CleanColumns(df_2022, col_convert)
 
 
-# In[10]:
+# In[21]:
 
 
 rev
 
 
-# In[11]:
+# In[22]:
 
 
 def convert(x):
@@ -102,7 +108,7 @@ def convert(x):
     return x
 
 
-# In[12]:
+# In[23]:
 
 
 for i in range(3,16):
@@ -110,26 +116,51 @@ for i in range(3,16):
 df_2022.head()
 
 
-# In[26]:
-
-
-fig = px.scatter(df_2022, x='Market Value 2021', y= 'Market Value 2022', color = 'Name')
-fig.show()
-
-
-# In[17]:
-
-
-fig = px.scatter(df_2022, x='Employees', y= 'Profits 2022', color = 'Name')
-fig.update_yaxes(categoryorder='category ascending')
-
-fig.show()
-
-
 # In[24]:
 
 
+fig = px.scatter(df_2022, x='Market Value 2021', y= 'Market Value 2022', color = 'Name')
+st.plotly_chart(fig)
+fig.show()
+
+
+# In[ ]:
+
+
+
+
+
+# In[26]:
+
+
 fig = px.histogram(df_2022, y='Employees', color = 'Name')
+fig.show()
+
+
+# In[27]:
+
+
+fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+fig.update_yaxes(categoryorder='category ascending')
+st.plotly_chart(fig)
+fig.show()
+
+
+# In[28]:
+
+
+fig = px.scatter(df_2022, x='Assets 2021', y= 'Profit 2021', color = 'Name', marginal_x="histogram", marginal_y="rug")
+fig.update_yaxes(categoryorder='category ascending')
+st.plotly_chart(fig)
+fig.show()
+
+
+# In[32]:
+
+
+fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+fig.update_yaxes(categoryorder='category ascending')
+st.plotly_chart(fig)
 fig.show()
 
 
