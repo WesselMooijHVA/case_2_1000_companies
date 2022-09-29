@@ -46,11 +46,9 @@ def CleanColumns(df, cols):
                     print("Seems to be an issue with column " + col)
     return df 
 
-rev = CleanColumns(df_2022, col_convert)
-
-# In[10]:
 
 
+#convert strings to floats
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
@@ -59,78 +57,17 @@ def convert(x):
     return x
 
 
-# In[11]:
-
-
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 df_2022.head()
 
 
-# In[ ]:
 
 
 
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[13]:
-
-
-#fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
-#fig.update_yaxes(categoryorder='category ascending')
-#st.plotly_chart(fig)
-#fig.show()
-
-
-# In[14]:
-
-
-#fig = px.scatter(df_2022, x='Assets 2021', y= 'Profit 2021', color = 'Name', marginal_x="histogram", marginal_y="rug")
-#fig.update_yaxes(categoryorder='category ascending')
-#st.plotly_chart(fig)
-#fig.show()
-
-
-# In[18]:
-
-
-#fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
-#fig.update_yaxes(categoryorder='category ascending')
-#fig.show()
-
-
-# In[16]:
-
-
-df_2022_top100= df_2022[0:86]
-
-#df_2021_top100
-#df_2022_top100 
-
-
-# In[17]:
-
-
+#build slider
 selectie = st.slider(
-    'slider',0,100,10)
+    'slider',0,int(df_2022.size[0]),10)
 
 #tijdelijke oplossing want 1,000 wilt niet converten naar int door kut komma (delete de laatste kolom met 1,000)
 df_2022.drop(df_2022.tail(1).index,inplace=True)
@@ -169,17 +106,11 @@ fig.update_yaxes(title_text="Profit", row=1, col=1)
 fig.update_yaxes(title_text="Profit",  row=1, col=2)
 
 fig.update_layout(height=600, width=1000, title_text="Side By Side 2021 & 2022")
+
+
 st.plotly_chart(fig)
 
 
-# In[ ]:
 
-
-
-
-
-# In[ ]:
-
-rev
 
 
