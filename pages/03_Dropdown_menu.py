@@ -105,7 +105,7 @@ rev = CleanColumns(df_2022, col_convert)
 # In[199]:
 
 
-st.subheader('2022 en 2021 data bruikbaar maken voor berekeningen'
+st.subheader('2022 en 2021 data bruikbaar maken voor berekeningen')
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
