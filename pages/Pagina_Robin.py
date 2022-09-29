@@ -25,10 +25,10 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-#clean up strings
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
 
+#cleaning up the dataframe for use
 def CleanColumns(df, cols):
 
     for col in cols: 
@@ -46,20 +46,16 @@ def CleanColumns(df, cols):
                     print("Seems to be an issue with column " + col)
     return df 
 
+rev = CleanColumns(df_2022, col_convert)
 
-
-#convert strings to floats
 def convert(x):
     if 'M' in str(x):
         x = float(str(x).replace(',','').strip('$M '))/1000
     elif 'B' in str(x):
         x = float(str(x).replace(',','').strip('$B '))
     return x
-
-
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
-df_2022.head()
 
 
 
