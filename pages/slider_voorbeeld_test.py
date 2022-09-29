@@ -33,6 +33,37 @@ df_2022
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name', how='inner')
 df_2022
 
+col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
+remove_symbols = ['$', '%',',','(',')','-']
+
+#cleaning up the dataframe for use
+def CleanColumns(df, cols):
+
+    for col in cols: 
+        if pd.api.types.is_object_dtype(df[col]):
+            if type(df[col]) != type(float):
+                for sym in remove_symbols: 
+                    df[col] = df[col].str.replace(sym, "", regex = True)
+                df[col] = df[col].str.strip()
+                df[col] = df[col].astype('string')
+                df[col] = df[col].fillna(0)
+                try:
+                    df[col] =pd.to_numeric(df[col], errors='coerce')
+                    print("Converted " + col )
+                except: 
+                    print("Seems to be an issue with column " + col)
+    return df 
+
+rev = CleanColumns(df_2022, col_convert)
+
+def convert(x):
+    if 'M' in str(x):
+        x = float(str(x).replace(',','').strip('$M '))/1000
+    elif 'B' in str(x):
+        x = float(str(x).replace(',','').strip('$B '))
+    return x)
+for i in range(3,16):
+    df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
 
 #selectie maken van 0 tot maximum size van de dataframe
