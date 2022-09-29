@@ -50,21 +50,18 @@ df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 
 
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
-df_2021
 
 
 # In[6]:
 
 
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
-df_2022
 
 
 # In[7]:
 
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
-df_2022
 
 
 # In[8]:
@@ -136,40 +133,39 @@ df_2022.head()
 
 
 
+# In[ ]:
+
+
+
+
+
 # In[13]:
 
 
-fig = px.histogram(df_2022, y='Employees', color = 'Name')
-fig.show()
+'''fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+fig.update_yaxes(categoryorder='category ascending')
+st.plotly_chart(fig)
+fig.show()'''
 
 
 # In[14]:
 
 
-fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+'''fig = px.scatter(df_2022, x='Assets 2021', y= 'Profit 2021', color = 'Name', marginal_x="histogram", marginal_y="rug")
 fig.update_yaxes(categoryorder='category ascending')
 st.plotly_chart(fig)
-fig.show()
+fig.show()'''
 
 
-# In[15]:
+# In[18]:
 
 
-fig = px.scatter(df_2022, x='Assets 2021', y= 'Profit 2021', color = 'Name', marginal_x="histogram", marginal_y="rug")
-fig.update_yaxes(categoryorder='category ascending')
-st.plotly_chart(fig)
-fig.show()
+#fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+#fig.update_yaxes(categoryorder='category ascending')
+#fig.show()
 
 
-# In[26]:
-
-
-fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
-fig.update_yaxes(categoryorder='category ascending')
-fig.show()
-
-
-# In[17]:
+# In[16]:
 
 
 df_2022_top100= df_2022[0:86]
@@ -178,20 +174,28 @@ df_2022_top100= df_2022[0:86]
 #df_2022_top100 
 
 
-# In[25]:
+# In[17]:
 
 
 selectie = st.slider(
-    'selectie text',0,int(df_2022.shape[0]),10)
+    'slider',0,int(df_2022.shape[0]),10)
+
+#tijdelijke oplossing want 1,000 wilt niet converten naar int door kut komma (delete de laatste kolom met 1,000)
+df_2022.drop(df_2022.tail(1).index,inplace=True)
+
+#rank van string naar een nummer veranderen
+df_2022[['Rank 2022']] = df_2022[['Rank 2022']].apply(pd.to_numeric)
+
+bedrijven = df_2022[df_2022['Rank 2022'] <= selectie]
 
 fig = make_subplots(rows=1, cols=2,
                    subplot_titles=("2021","2022",))
                    
 
 fig.add_trace(
-    go.Scatter(x=df_2022_top100['Assets 2021'], y=df_2022_top100['Profit 2021'],
+    go.Scatter(x=bedrijven['Assets 2021'], y=bedrijven['Profit 2021'],
         mode="markers+text",
-        text=df_2022_top100["Name"],
+        text=bedrijven["Name"],
         textposition="bottom center"
               
               ),
@@ -199,9 +203,9 @@ fig.add_trace(
 )
 
 fig.add_trace(
-    go.Scatter(x=df_2022_top100['Assets 2022'], y=df_2022_top100['Profits 2022'],
+    go.Scatter( x=bedrijven['Assets 2022'], y=bedrijven['Profits 2022'],
         mode="markers+text",
-        text=df_2022_top100["Name"],
+        text=bedrijven["Name"],
         textposition="bottom center"
               ),
     row=1, col=2
