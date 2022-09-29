@@ -69,11 +69,11 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-# In[24]:
+# In[29]:
 
 
 st.subheader('2022 data bruikbaar maken voor berekeningen')
-st.code('''''''''''col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
+st.code('''''''''col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
 
 def CleanColumns(df, cols):
@@ -93,7 +93,7 @@ def CleanColumns(df, cols):
                     print("Seems to be an issue with column " + col)
     return df 
 
-rev = CleanColumns(df_2022, col_convert)''''''''''', language= 'python'
+rev = CleanColumns(df_2022, col_convert)''', language= 'python')
 
 
 # In[28]:
