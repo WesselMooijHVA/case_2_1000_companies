@@ -67,6 +67,8 @@ df_2022[['Name', 'Assets 2021', 'Profit 2021', 'Assets 2022', 'Profits 2022']]
 ''')
 st.dataframe(df_2022[['Name', 'Assets 2021', 'Profit 2021', 'Assets 2022', 'Profits 2022']])
 
+#Slider en grafiek titel
+st.subheader('slider en grafiek')
 
 #build slider
 selectie = st.slider(
