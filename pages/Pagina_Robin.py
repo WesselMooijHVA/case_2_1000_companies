@@ -67,9 +67,8 @@ df_2022.head()
 
 #build slider
 selectie = st.slider(
-    'slider',0,int(df_2022.shape[0]),10)
+    'Selecteer het aantal bedrijven (Top)',0,int(df_2022.shape[0]),10)
 
-#tijdelijke oplossing want 1,000 wilt niet converten naar int door kut komma (delete de laatste kolom met 1,000)
 df_2022.drop(df_2022.tail(1).index,inplace=True)
 
 #rank van string naar een nummer veranderen
