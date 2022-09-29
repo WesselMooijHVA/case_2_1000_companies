@@ -158,4 +158,4 @@ fig.update_layout(height=600, width=1000, title_text="Side By Side 2021 & 2022")
 st.plotly_chart(fig)
 '''
 st.code(plot_code)
-
+st.balloons()
