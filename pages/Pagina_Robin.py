@@ -50,21 +50,18 @@ df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 
 
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
-df_2021
 
 
 # In[6]:
 
 
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
-df_2022
 
 
 # In[7]:
 
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
-df_2022
 
 
 # In[8]:
@@ -136,14 +133,13 @@ df_2022.head()
 
 
 
+# In[ ]:
+
+
+
+
+
 # In[13]:
-
-
-fig = px.histogram(df_2022, y='Employees', color = 'Name')
-fig.show()
-
-
-# In[14]:
 
 
 fig = px.scatter(df_2022, x='Assets 2022', y= 'Profits 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
@@ -152,7 +148,7 @@ st.plotly_chart(fig)
 fig.show()
 
 
-# In[15]:
+# In[14]:
 
 
 fig = px.scatter(df_2022, x='Assets 2021', y= 'Profit 2021', color = 'Name', marginal_x="histogram", marginal_y="rug")
@@ -161,15 +157,15 @@ st.plotly_chart(fig)
 fig.show()
 
 
-# In[26]:
+# In[18]:
 
 
-fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
-fig.update_yaxes(categoryorder='category ascending')
-fig.show()
+#fig = px.scatter(df_2022, x='Assets 2021', y= 'Assets 2022', color = 'Name', marginal_x="histogram", marginal_y="rug")
+#fig.update_yaxes(categoryorder='category ascending')
+#fig.show()
 
 
-# In[17]:
+# In[16]:
 
 
 df_2022_top100= df_2022[0:86]
@@ -178,7 +174,7 @@ df_2022_top100= df_2022[0:86]
 #df_2022_top100 
 
 
-# In[31]:
+# In[17]:
 
 
 selectie = st.slider(
