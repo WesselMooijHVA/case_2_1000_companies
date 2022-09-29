@@ -31,7 +31,7 @@ api = KaggleApi()
 authentication.auth_json(api)
 
 
-# In[15]:
+# In[22]:
 
 
 st.title('dataframe verwerking en eerste analyses')
@@ -123,7 +123,7 @@ def CleanColumns(df, cols):
 rev = CleanColumns(df_2022, col_convert)
 
 
-# In[ ]:
+# In[12]:
 
 
 st.subheader('2021 data bruikbaar maken voor berekeningen')
@@ -137,7 +137,7 @@ for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)''''' , language= 'python')
 
 
-# In[12]:
+# In[13]:
 
 
 
@@ -149,14 +149,14 @@ def convert(x):
     return x
 
 
-# In[13]:
+# In[14]:
 
 
 for i in range(3,16):
     df_2022.iloc[:,i] = df_2022.iloc[:,i].apply(convert)
 
 
-# In[23]:
+# In[15]:
 
 
 st.subheader('de berekeningen')
@@ -166,35 +166,28 @@ df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees
 df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 df_2022.fillna(0, axis= 1)''''', language= 'python')
+df_2022= df_2022.fillna(1)
 
 
-# In[24]:
+# In[16]:
 
 
-df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']*1000
+df_2022['Market Value 2021']= df_2022['Market Value 2021']*1000
+df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
 df_2022['profit_per_employee_2021']= df_2022['Profit 2021']/ df_2022['Employees'] 
 df_2022['profit_per_employee_2022']= df_2022['Profits 2022']/ df_2022['Employees']
 df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employees']
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
-df_2022.fillna(0, axis= 1)
 
 
-# In[32]:
+# In[17]:
 
 
 df_2022_top100= df_2022[0:86]
 st.subheader('eindresultaat')
 
 
-# In[44]:
-
-
-Name= df_2022_top100['Name']
-input_top100= st.sidebar.selectbox('selecteer variabelen', (Name))
-st.dataframe(df_2022_top100)
-
-
-# In[19]:
+# In[18]:
 
 
 corr = df_2022.corr()
@@ -204,6 +197,24 @@ fig2.show()
 st.plotly_chart(fig2)
 
 
+# In[19]:
+
+
+df_2022
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
 # In[ ]:
 
 
@@ -220,18 +231,6 @@ st.plotly_chart(fig2)
 
 
 
-
-
-# In[ ]:
-
-
-
-
-
-# In[21]:
-
-
-df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 
 
 # In[20]:
@@ -245,10 +244,25 @@ fig.update_yaxes(title_text='Verandering in Marktwaarde')
 fig.show()
 
 
-# In[22]:
+# In[21]:
 
 
 st.plotly_chart(fig)
+
+
+# In[ ]:
+
+
+
+
+
+# In[23]:
+
+
+box= st.checkbox('grote marktwaarde')
+st.write('checkbox is', box)
+if box:
+    df_2022_top100[0: 10]
 
 
 # In[ ]:
