@@ -62,7 +62,11 @@ for i in range(3,16):
 #Title en df
 st.title('Fortune 1000 Assets & Profits')
 st.subheader('Dataframe')
+st.code('''
+df_2022[['Name', 'Assets 2021', 'Profit 2021', 'Assets 2022', 'Profits 2022']]
+''')
 st.dataframe(df_2022[['Name', 'Assets 2021', 'Profit 2021', 'Assets 2022', 'Profits 2022']])
+
 
 #build slider
 selectie = st.slider(
