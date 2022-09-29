@@ -31,7 +31,7 @@ api = KaggleApi()
 authentication.auth_json(api)
 
 
-# In[20]:
+# In[4]:
 
 
 st.title('dataframe hervorming en Market Value')
@@ -125,7 +125,7 @@ for i in range(3,16):
 df_2022['Market_Value_change']= df_2022['Market Value 2022'] - df_2022['Market Value 2021']
 
 
-# In[26]:
+# In[14]:
 
 
 corr = df_2022.corr()
@@ -133,16 +133,6 @@ fig2= px.imshow(corr, text_auto= True, color_continuous_scale='RdBu_r', width= 1
 fig2.update_layout(title='heatmap van de verschillende correlaties tussen de kolommen')
 fig2.show()
 st.plotly_chart(fig2)
-kolommen= df_2022_top100.columns
-st.sidebar.selectbox('selecteer de variabelen',('Rank 2022', 'Name', 'Revenues 2022', 'revenue_percent_change',
-       'Profits 2022', 'profits_percent_change', 'Assets 2022',
-       'Market Value 2022', 'change_in_rank', 'Employees', 'Rank 2021',
-       'Country', 'Sales 2021', 'Profit 2021', 'Assets 2021',
-       'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
-       'profit_per_employee_2022', 'revenue_per_employee_2022',
-       'profit_per_sale_2021'))
-selectboxselection= df_2022[df_2022] == kolommen
-st.dataframe(selectboxselection)
 
 
 # In[15]:
@@ -154,20 +144,35 @@ df_2022['revenue_per_employee_2022']= df_2022['Revenues 2022']/ df_2022['Employe
 df_2022.fillna(0, axis= 1)
 
 
-# In[25]:
+# In[16]:
+
+
+kolommen= df_2022.columns
+st.sidebar.selectbox('selecteer de variabelen',('Rank 2022', 'Name', 'Revenues 2022', 'revenue_percent_change',
+       'Profits 2022', 'profits_percent_change', 'Assets 2022',
+       'Market Value 2022', 'change_in_rank', 'Employees', 'Rank 2021',
+       'Country', 'Sales 2021', 'Profit 2021', 'Assets 2021',
+       'Market Value 2021', 'Market_Value_change', 'profit_per_employee_2021',
+       'profit_per_employee_2022', 'revenue_per_employee_2022',
+       'profit_per_sale_2021'))
+selectboxselection= df_2022 == kolommen
+st.dataframe(selectboxselection)
+
+
+# In[21]:
 
 
 df_2022_top100= df_2022[0:86]
 df_2022_top100
 
 
-# In[17]:
+# In[18]:
 
 
 df_2022['profit_per_sale_2021']= df_2022['Profit 2021']/df_2022['Sales 2021']
 
 
-# In[18]:
+# In[19]:
 
 
 fig= px.bar(df_2022_top100, x= 'Name', y= 'Market_Value_change', hover_data=['Market Value 2022', 'Market Value 2021'], color='Market_Value_change', height=600)
@@ -177,7 +182,7 @@ fig.update_yaxes(title_text='Verandering in Marktwaarde')
 fig.show()
 
 
-# In[19]:
+# In[20]:
 
 
 st.plotly_chart(fig)
