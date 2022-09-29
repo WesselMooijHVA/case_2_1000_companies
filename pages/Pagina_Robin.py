@@ -1,16 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-#!pip install kaggle
-#!pip install streamlit
-
-
-# In[2]:
-
-
 import requests
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
@@ -25,48 +12,20 @@ api = KaggleApi()
 
 authentication.auth_json(api)
 
-
-# In[ ]:
-
-
-
-
-
-# In[3]:
-
-
 api.dataset_download_files('surajjha101/fortune-top-1000-companies-by-revenue-2022', unzip=True)
 df_2022 = pd.read_csv('Fortune 1000 Companies by Revenue.csv')
-
-
-# In[4]:
-
 
 api.dataset_download_files('shivamb/fortune-global-2000-companies-till-2021', unzip=True)
 df_2021 = pd.read_csv('fortune_2000_in_2021.csv')
 
 
-# In[5]:
-
-
 df_2021 = df_2021.rename(columns={'Rank':'Rank 2021', 'Sales':'Sales 2021', 'Profit':'Profit 2021', 'Assets':'Assets 2021', 'Market Value':'Market Value 2021'})
-
-
-# In[6]:
-
-
 df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues ':'Revenues 2022', 'profits ':'Profits 2022', 'assets':'Assets 2022', 'market_value ':'Market Value 2022', 'employees ':'Employees'})
-
-
-# In[7]:
-
 
 df_2022 = df_2022.join(df_2021.set_index('Name'), on='Name')
 
 
-# In[8]:
-
-
+#clean up strings
 col_convert = [ 'Revenues 2022', 'Profits 2022', 'Assets 2022', 'Market Value 2022', 'revenue_percent_change', 'profits_percent_change','Employees']
 remove_symbols = ['$', '%',',','(',')','-']
 
@@ -88,13 +47,6 @@ def CleanColumns(df, cols):
     return df 
 
 rev = CleanColumns(df_2022, col_convert)
-
-
-# In[9]:
-
-
-rev
-
 
 # In[10]:
 
@@ -228,6 +180,6 @@ st.plotly_chart(fig)
 
 # In[ ]:
 
-
+rev
 
 
