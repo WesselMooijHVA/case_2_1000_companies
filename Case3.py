@@ -28,6 +28,7 @@ df_2022 = df_2022.rename(columns={'rank ':'Rank 2022', 'name ':'Name', 'revenues
 st.set_page_config(page_title='API en Data', page_icon=None)
 
 st.title('Fortune 1000 companies')
+
 st.header('kaggle API')
 code = '''
 #authentication.py
@@ -47,6 +48,7 @@ def auth_json(api):
 '''
 st.code(code, language='python')
 st.write('Deze functie word dan gebruikt voor de authentication')
+
 code = '''
 import authentication
 from kaggle.api.kaggle_api_extended import KaggleApi
@@ -56,11 +58,14 @@ authentication.auth_json(api)
 '''
 st.code(code, language='python')
 
+
 st.header('Dataframes die we gebruiken')
 st.subheader('data 2021 fortune 1000 companies')
 st.image('Kaggle1.png')
 st.dataframe(df_2021)
+
 st.subheader('data 2022 fortune 1000 companies')
+st.image('Kaggle2.png')
 st.dataframe(df_2022)
 
 
